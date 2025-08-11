@@ -9,3 +9,4 @@ beautifulsoup4
 requests
 PyPDF2
 huggingface-hub
+pypdf
