@@ -4,3 +4,4 @@ langchain-community
 langchain-groq
 faiss-cpu
 sentence-transformers
+beautifulsoup4
