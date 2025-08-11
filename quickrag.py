@@ -1,4 +1,5 @@
 import os
+import tempfile
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -9,7 +10,7 @@ from langchain_groq import ChatGroq
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
-# Streamlit page config & styling (same as before)
+# Streamlit page config & styling
 st.set_page_config(page_title="QuickRAG", page_icon="⚡", layout="wide")
 st.markdown(
     """
@@ -69,7 +70,6 @@ def process_documents(docs):
     )
     return rag_chain
 
-# Initialize session state vars
 if "docs" not in st.session_state:
     st.session_state.docs = None
 if "rag_chain" not in st.session_state:
@@ -98,7 +98,12 @@ with st.expander("📥 Upload or Link Your Data", expanded=True):
         if st.button("Load PDF Data", use_container_width=True):
             if pdf_file:
                 with st.spinner("📚 Processing PDF..."):
-                    loader = PyPDFLoader(pdf_file)
+                    # Save uploaded file to a temp file before loading
+                    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                        tmp_file.write(pdf_file.read())
+                        tmp_path = tmp_file.name
+                    
+                    loader = PyPDFLoader(tmp_path)
                     docs = loader.load()
                     st.session_state.docs = docs
                     st.session_state.rag_chain = process_documents(docs)
