@@ -4,7 +4,7 @@ import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores.faiss import FAISS
+from langchain.vectorstores import FAISS
 from langchain import hub
 from langchain_groq import ChatGroq
 from langchain_core.runnables import RunnablePassthrough
