@@ -5,12 +5,11 @@ from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores.faiss import FAISS
-from langchain import hub
 from langchain_groq import ChatGroq
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+from langchain.prompts import PromptTemplate
 
-# Streamlit page config & styling
 st.set_page_config(page_title="QuickRAG", page_icon="⚡", layout="wide")
 st.markdown(
     """
@@ -56,7 +55,15 @@ def process_documents(docs):
     vectorstore = FAISS.from_documents(documents=splits, embedding=embedding)
     retriever = vectorstore.as_retriever()
 
-    prompt = hub.pull("rlm/rag-prompt")
+    prompt = PromptTemplate.from_template_string("""
+    You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. 
+    If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.
+    
+    Question: {question}
+    Context: {context}
+    Answer:
+    """)
+
     llm = ChatGroq(model="llama-3.1-8b-instant")
 
     def format_docs(docs):
