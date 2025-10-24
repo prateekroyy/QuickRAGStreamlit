@@ -56,14 +56,17 @@ def process_documents(docs):
     vectorstore = FAISS.from_documents(documents=splits, embedding=embedding)
     retriever = vectorstore.as_retriever()
 
-    prompt = PromptTemplate.from_template_string("""
+    prompt = PromptTemplate.from_template(
+    """
     You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. 
     If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.
     
     Question: {question}
     Context: {context}
     Answer:
-    """)
+    """,
+    template_format="f-string"
+    )
 
     llm = ChatGroq(model="llama-3.1-8b-instant")
 
