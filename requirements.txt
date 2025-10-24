@@ -10,3 +10,4 @@ requests
 PyPDF2
 huggingface-hub
 pypdf
+langchain-text-splitters
