@@ -8,7 +8,7 @@ from langchain_community.vectorstores.faiss import FAISS
 from langchain_groq import ChatGroq
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from langchain.prompts.prompt import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 
 st.set_page_config(page_title="QuickRAG", page_icon="⚡", layout="wide")
