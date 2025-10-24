@@ -1,21 +1,22 @@
 # Web app framework
-streamlit==1.27.0  # Streamlit for building the interactive UI
+streamlit==1.27.0  # Latest stable Streamlit
 
-# LangChain and related extensions
-langchain==0.3.79  # Core LangChain framework
-langchain-community==0.0.52  # Community-supported document loaders, embeddings, etc.
-langchain-groq==0.0.18  # Groq LLM integration
-langchain-core==0.0.59  # Core components for runnables and prompts
-langchain-text-splitters==0.1.11  # Text splitting utilities
-
-# Vector databases and embeddings
-faiss-cpu==1.7.4  # FAISS for vector storage and similarity search
-sentence-transformers==2.2.2  # Pretrained embeddings models
-huggingface-hub==0.16.4  # Access to HuggingFace models
+# Core LangChain packages
+langchain==0.3.79
 langchain-community==0.0.52
+langchain-core==0.0.59
+langchain-groq==0.0.18
+langchain-text-splitters==0.1.11
 
-# PDF and web scraping
-PyPDF2==3.1.0  # PDF parsing and reading
-pypdf==3.16.0  # Alternative PDF parser (used by some loaders)
-beautifulsoup4==4.12.2  # HTML parsing for web scraping
-requests==2.31.0  # HTTP requests to fetch web pages
+# Vector store and embeddings
+faiss-cpu==1.7.4
+sentence-transformers==2.2.2
+huggingface-hub==0.16.4
+
+# PDF & document handling
+PyPDF2==3.1.0
+pypdf==3.16.0
+
+# Web scraping & requests
+beautifulsoup4==4.12.2
+requests==2.31.0
